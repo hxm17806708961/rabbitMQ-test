@@ -16,10 +16,14 @@ public class worker01 {
         Channel channel = RabbitMqUtils.getChannel();
         System.out.println("C2 消费者启动等待消费......");
 
-        channel.basicConsume(RabbitMqUtils.QUEUE_NAME, ((s, delivery) -> {
+
+        boolean autoAck = false;
+        channel.basicConsume(RabbitMqUtils.QUEUE_NAME, autoAck, ((s, delivery) -> {
             String receivedMessage = new String(delivery.getBody());
             System.out.println("接收到消息:"+receivedMessage);
 
+            // 应答
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         }), (s -> {
             System.out.println(s+"消费者取消消费接口回调逻辑");
 
