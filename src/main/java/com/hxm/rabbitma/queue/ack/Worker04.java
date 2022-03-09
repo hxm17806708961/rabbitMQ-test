@@ -31,6 +31,9 @@ public class Worker04 {
              */
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
         };
+        // 预取值
+        int prefetchCount = 4;
+        channel.basicQos(prefetchCount);
         //采用手动应答
         boolean autoAck=false;
         channel.basicConsume(QUEUE_NAME,autoAck,deliverCallback,(consumerTag)->{
