@@ -13,17 +13,17 @@ import java.util.concurrent.TimeoutException;
  * @author hxmao
  * @date 2022/2/28 17:04
  */
-public class Worker03 {
+public class Worker04 {
 
     private final static String QUEUE_NAME = "task_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         Channel channel = RabbitMqUtils.getChannel();
-        System.out.println("C1 等待接收消息处理时间较短");
+        System.out.println("C2 等待接收消息处理时间较长");
         //消息消费的时候如何处理消息
         DeliverCallback deliverCallback=(consumerTag,delivery)->{
             String message= new String(delivery.getBody());
-            SleepUtils.sleep(1);
+            SleepUtils.sleep(30);
             System.out.println("接收到消息:"+message);
             /**
              * 1.消息标记 tag
@@ -36,6 +36,5 @@ public class Worker03 {
         channel.basicConsume(QUEUE_NAME,autoAck,deliverCallback,(consumerTag)->{
             System.out.println(consumerTag+"消费者取消消费接口回调逻辑");
         });
-
     }
 }

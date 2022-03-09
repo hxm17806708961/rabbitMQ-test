@@ -9,10 +9,9 @@ public class SleepUtils {
     public static void sleep(int m){
 
         try {
-            Thread.sleep(m);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-
+            Thread.sleep(1000*m);
+        } catch (InterruptedException _ignored) {
+            Thread.currentThread().interrupt();
         }
     }
 }
