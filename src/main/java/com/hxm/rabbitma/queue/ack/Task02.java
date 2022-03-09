@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * 消息应答
  * @author hxmao
  * @date 2022/2/28 16:56
  */
