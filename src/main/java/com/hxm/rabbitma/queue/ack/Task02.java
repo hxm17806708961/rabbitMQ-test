@@ -2,6 +2,7 @@ package com.hxm.rabbitma.queue.ack;
 
 import com.hxm.rabbitma.utils.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class Task02 {
             System.out.println("请输入信息");
             while (sc.hasNext()) {
                 String message = sc.nextLine();
-                channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
+                channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
                 System.out.println("生产者发出消息" + message);
             }
         }
