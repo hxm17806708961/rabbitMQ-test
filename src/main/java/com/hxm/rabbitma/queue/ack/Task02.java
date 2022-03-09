@@ -18,9 +18,12 @@ public class Task02 {
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
 
 
+        // 持久化
+        boolean durable = true;
+
         // 声明队列
         try (Channel channel = RabbitMqUtils.getChannel()) {
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
             Scanner sc = new Scanner(System.in);
             System.out.println("请输入信息");
             while (sc.hasNext()) {
