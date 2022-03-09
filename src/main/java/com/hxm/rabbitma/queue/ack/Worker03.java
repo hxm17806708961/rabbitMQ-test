@@ -31,6 +31,9 @@ public class Worker03 {
              */
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
         };
+        // 不公平分发，能者多劳
+        int prefetchCount = 1;
+        channel.basicQos(prefetchCount);
         //采用手动应答
         boolean autoAck=false;
         channel.basicConsume(QUEUE_NAME,autoAck,deliverCallback,(consumerTag)->{
